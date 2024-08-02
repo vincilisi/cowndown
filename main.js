@@ -7,15 +7,15 @@ let btnreset = document.querySelector('#reset')//bottone reset
 
 let intervall;
 let counter;
-let remaingsecond = 0
+let sec = 0
 
 
 btnstart.addEventListener('click', ()=>{
     clearInterval(intervall)
-    counter = inpcow.value // secondi inserto
+    counter = inpcow.value // secondi inserti
 
-    if(remaingsecond !==0){
-        counter=remaingsecond;
+    if(sec !==0){
+        counter=sec;
     }
     intervall = setInterval(()=>{
         if (counter < 0) {
@@ -32,7 +32,7 @@ btnstart.addEventListener('click', ()=>{
 
 btnstop.addEventListener('click', ()=>{
     clearInterval(intervall)
-    remaingsecond=counter
+    sec=counter
 })
 
 
