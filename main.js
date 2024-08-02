@@ -1,30 +1,50 @@
-let countdownInterval;
-let remainingSeconds = 0;
+let rimanenza = document.querySelector('#rimanenza')//tempo rimanente
+let inpcow = document.querySelector('#inpcow')//elemento dove inserire secondi
+let btnstart = document.querySelector('#start')//bottone start
+let btnstop = document.querySelector('#stop')// bottone stop
+let btnreset = document.querySelector('#reset')//bottone reset
 
-function startCountdown() {
-    const inputSeconds = parseInt(document.getElementById('inputSeconds').value);
-    if (!isNaN(inputSeconds) && inputSeconds > 0) {
-        remainingSeconds = inputSeconds;
-        countdownInterval = setInterval(updateCountdown, 1000);
+
+let intervall;
+let counter;
+let remaingsecond = 0
+
+
+btnstart.addEventListener('click', ()=>{
+    clearInterval(intervall)
+    counter = inpcow.value // secondi inserto
+
+    if(remaingsecond !==0){
+        counter=remaingsecond;
     }
-}
+    intervall = setInterval(()=>{
+        if (counter < 0) {
+            clearInterval(intervall)
+            rimanenza.innerHTML= 'Tempo Scaduto'
+        }else{
+            rimanenza.innerHTML=counter
+            counter --  
+        }
+    },1000);
+})
 
-function updateCountdown() {
-    if (remainingSeconds > 0) {
-        remainingSeconds--;
-        document.title = `Countdown: ${remainingSeconds} secondi`;
-    } else {
-        clearInterval(countdownInterval);
-        document.title = 'Countdown terminato!';
-    }
-}
 
-function pauseCountdown() {
-    clearInterval(countdownInterval);
-}
 
-function resetCountdown() {
-    clearInterval(countdownInterval);
-    remainingSeconds = 0;
-    document.title = 'Countdown azzerato';
-}
+btnstop.addEventListener('click', ()=>{
+    clearInterval(intervall)
+    remaingsecond=counter
+})
+
+
+
+
+
+btnreset.addEventListener('click',()=>{
+    inpcow.value='';
+    clearInterval(intervall);
+    rimanenza.innerHTML='';
+})
+
+
+
+
